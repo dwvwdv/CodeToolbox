@@ -23,7 +23,7 @@ QString read_data(QString filename,QString tag){
     qDebug() << filePath + fileName;
     if (!file.open(QIODevice::ReadOnly)){
         qDebug() << "Cannot open file for reading:" << qPrintable(file.errorString());
-        return "Empty Content or Error.";
+        return "Empty Content or Error";
     }
 
     QTextStream in(&file);

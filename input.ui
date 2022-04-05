@@ -14,9 +14,16 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color:rgb(62, 0, 94)</string>
+   <string notr="true">background-color:#2f3542;
+border-radius: 40px;
+font: 9pt &quot;Arial&quot;;
+font-size: 20px;
+border: 2px solid rgb(85, 0, 255);</string>
   </property>
   <widget class="QTextEdit" name="textEdit">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>30</x>
@@ -30,8 +37,8 @@
 font: 9pt &quot;Arial&quot;;
 font-size: 20px;
 border: 2px solid rgb(85, 0, 255);
-background-color: #990DFF;
-color: rgb(0, 170, 255);</string>
+background-color: #2d3436;
+color:#00cec9</string>
    </property>
    <property name="html">
     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -46,8 +53,8 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>540</x>
      <y>400</y>
-     <width>80</width>
-     <height>24</height>
+     <width>81</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -55,11 +62,32 @@ p, li { white-space: pre-wrap; }
 font: 9pt &quot;Arial&quot;;
 font-size: 20px;
 border: 2px solid rgb(85, 0, 255);
-background-color: #990DFF;
-color: rgb(0, 170, 255);</string>
+background-color: #000000;
+color: #00FF00;</string>
    </property>
    <property name="text">
     <string>Modify</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="ExitBtn">
+   <property name="geometry">
+    <rect>
+     <x>540</x>
+     <y>360</y>
+     <width>81</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-radius: 6px;
+font: 9pt &quot;Arial&quot;;
+font-size: 20px;
+border: 2px solid rgb(85, 0, 255);
+background-color: #000000;
+color: #00FF00;</string>
+   </property>
+   <property name="text">
+    <string>Exit</string>
    </property>
   </widget>
  </widget>

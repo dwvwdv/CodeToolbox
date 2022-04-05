@@ -20,6 +20,8 @@ public:
     void closeThisWindow();
     void inputCode();
     void setTag(QString );
+signals:
+    void signalInputCode();
 
 private:
     Ui::Input *ui;

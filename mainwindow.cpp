@@ -1,37 +1,87 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+
+//void MainWindow::keyPressEvent(QKeyEvent *e){
+//    if(e->key() == Qt::Key_D){
+//        qDebug() << "nb!";
+//    }
+//}
+
+bool MainWindow::eventFilter(QObject *obj, QEvent *event)
+{
+    if (event->type() == QEvent::KeyPress)
+    {
+        QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+//           qDebug() << "key " << keyEvent->key() << "from" << obj;
+        if(obj == ui->SelectList){
+            if(keyEvent->key() == Qt::Key_D){
+                deleteItem();
+            }
+        }
+    }
+    return QObject::eventFilter(obj, event);
+}
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    setFixedSize(750,515);
+    qApp->installEventFilter(this);
+
+    this->setFocusPolicy(Qt::StrongFocus);
     this->setWindowIcon(QIcon("../icon.png"));
 
     menu.show();
     QListWidget *list = ui->SelectList;
 
-
-    //????? MainWindow
+    //Enter MainWindow
     connect(&menu,&Menu::signalMenuClose,this,&MainWindow::openMainWindow);
 
-    //?????? menu
+    //Enter Menu
     QPushButton *exit = ui->back;
     connect(exit,QPushButton::clicked,this,&MainWindow::openMenu);
 
-    //?? CodeView
+    //Edit CodeView
     connect(list,&QListWidget::itemDoubleClicked,this,&MainWindow::slotSelctClick);
 
-    //?? CodeView
+    //Delete QListItem
+//    connect(list,&QKeyEvent::,this,&MainWindow::deleteItem);
+
+    //Display CodeView
     connect(list,&QListWidget::itemClicked,this,&MainWindow::viewCode);
 
+    //Edit CodeView result update
+    connect(&input,&Input::signalInputCode,this,&MainWindow::viewCodeUpdate);
+
+}
+
+void MainWindow::deleteItem(){
+    QListWidgetItem *item = ui->SelectList->currentItem();
+    if(item == nullptr)
+        return;
+
+    QString dFile = QDir::currentPath() + "/" + this->windowTitle() + "/" + item->text();
+    bool isFinshDelete = QFile::remove(dFile);
+    if(isFinshDelete)
+        qDebug() << "Delete Finish!" << endl;
+    else
+        qDebug() << "Error,Check File in " << dFile << endl;
+    ui->SelectList->removeItemWidget(item);
+    delete item;
 }
 
 QStringList MainWindow::getAllFunctionFile(){
     QDir dir(QDir::currentPath() + "/" + this->windowTitle());
     dir.setFilter(QDir::NoDotAndDotDot | QDir::AllEntries);
-    QStringList functionFiles = dir.entryList();
+    functionFiles = dir.entryList();
     return functionFiles;
+}
+
+void MainWindow::viewCodeUpdate(){
+    viewCode();
 }
 
 void MainWindow::setFunctionList(QStringList functionNames){
@@ -62,13 +112,20 @@ void MainWindow::slotSelctClick(){
     //Add function code
     if(ui->SelectList->currentItem()->text() == "Add Code..."){
         QString newItemName = QInputDialog::getText(this,tr("Input"),tr("Input Item Name:"),QLineEdit::Normal,"Your New Item");
-        ui->SelectList->addItem(newItemName);
+        bool isDifferent = true;
+        for(auto s:functionFiles)
+            if(s == newItemName){
+                isDifferent = false;
+                break;
+            }
+        if(newItemName != nullptr && isDifferent)
+            ui->SelectList->addItem(newItemName);
     }
     //Modify code
     else{
         input.setWindowTitle(ui->SelectList->currentItem()->text());
         input.setTag(this->windowTitle());
-        input.show();
+        input.openThisWindow();
     }
 }
 
