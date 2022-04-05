@@ -37,11 +37,21 @@ public:
     void viewCodeUpdate();
 signals:
     void signalOpenViewCode();
+protected:
+    void mouseMoveEvent(QMouseEvent *event);
+    void mousePressEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
+
 
 private:
     Ui::MainWindow *ui;
     Menu menu;
     Input input;
+
+    //窗口移動
+    bool        m_bDrag;
+    QPoint      mouseStartPoint;
+    QPoint      windowTopLeftPoint;
 
     QStringList functionFiles;
 };

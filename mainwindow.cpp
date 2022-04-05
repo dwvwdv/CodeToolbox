@@ -28,7 +28,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    setFixedSize(750,515);
+    setFixedSize(750,450);
+    this->setAttribute(Qt::WA_TranslucentBackground);//背景透明化
+    this->setWindowFlags(Qt::FramelessWindowHint);   //無邊窗口
     qApp->installEventFilter(this);
 
     this->setFocusPolicy(Qt::StrongFocus);
@@ -112,13 +114,10 @@ void MainWindow::slotSelctClick(){
     //Add function code
     if(ui->SelectList->currentItem()->text() == "Add Code..."){
         QString newItemName = QInputDialog::getText(this,tr("Input"),tr("Input Item Name:"),QLineEdit::Normal,"Your New Item");
-        bool isDifferent = true;
-        for(auto s:functionFiles)
-            if(s == newItemName){
-                isDifferent = false;
-                break;
-            }
-        if(newItemName != nullptr && isDifferent)
+        QList<QListWidgetItem *> items = ui->SelectList->findItems(newItemName,Qt::MatchExactly);
+            if(items.size() > 0)
+                return ;
+        if(newItemName != nullptr)
             ui->SelectList->addItem(newItemName);
     }
     //Modify code
@@ -136,6 +135,33 @@ void MainWindow::viewCode(){
     QTextEdit *codeView = ui->CodeView;
     QString con = read_data(ui->SelectList->currentItem()->text(),this->windowTitle());
     codeView->setText(con);
+}
+
+void MainWindow::mousePressEvent(QMouseEvent *event)
+{
+    if(event->button() == Qt::LeftButton)
+    {
+        m_bDrag = true;
+        mouseStartPoint = event->globalPos();
+        windowTopLeftPoint = this->frameGeometry().topLeft();
+    }
+}
+
+void MainWindow::mouseMoveEvent(QMouseEvent *event)
+{
+    if(m_bDrag)
+    {
+        QPoint distance = event->globalPos() - mouseStartPoint;
+        this->move(windowTopLeftPoint + distance);
+    }
+}
+
+void MainWindow::mouseReleaseEvent(QMouseEvent *event)
+{
+    if(event->button() == Qt::LeftButton)
+    {
+        m_bDrag = false;
+    }
 }
 
 MainWindow::~MainWindow()

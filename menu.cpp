@@ -1,9 +1,7 @@
 #include "menu.h"
 #include "ui_menu.h"
 
-#include <QDir>
-#include <QDebug>
-#include <regex>
+
 
 Menu::Menu(QWidget *parent) :
     QWidget(parent),
@@ -11,12 +9,14 @@ Menu::Menu(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowIcon(QIcon("../icon.png"));
+    this->setAttribute(Qt::WA_TranslucentBackground);//背景透明化
+    this->setWindowFlags(Qt::FramelessWindowHint);   //無邊窗口
     setFixedSize(300,270);
 
     //DefaultDir [C++ Python C# Java PHP Shell]
     QDir dir(QDir::currentPath());
     dir.setFilter(QDir::NoDotAndDotDot | QDir::AllEntries);
-    QString defaultDirs[] = {"C++","Python","C#","Java","PHP","Shell"};
+    QString defaultDirs[] = {"C++","Python","Unity","Java","PHP","Shell"};
     for(auto dDirName:defaultDirs){
         QDir dD(dir.currentPath() + dDirName);
         if(!dD.exists()){
@@ -42,3 +42,30 @@ void Menu::slotSelctClick()
     emit signalMenuClose(ui->SelectList->currentItem()->text());
 }
 
+
+void Menu::mousePressEvent(QMouseEvent *event)
+{
+    if(event->button() == Qt::LeftButton)
+    {
+        m_bDrag = true;
+        mouseStartPoint = event->globalPos();
+        windowTopLeftPoint = this->frameGeometry().topLeft();
+    }
+}
+
+void Menu::mouseMoveEvent(QMouseEvent *event)
+{
+    if(m_bDrag)
+    {
+        QPoint distance = event->globalPos() - mouseStartPoint;
+        this->move(windowTopLeftPoint + distance);
+    }
+}
+
+void Menu::mouseReleaseEvent(QMouseEvent *event)
+{
+    if(event->button() == Qt::LeftButton)
+    {
+        m_bDrag = false;
+    }
+}

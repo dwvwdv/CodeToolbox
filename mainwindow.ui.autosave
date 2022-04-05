@@ -85,27 +85,6 @@ background-color: #000000;</string>
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>520</x>
-      <y>20</y>
-      <width>20</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(255, 0, 0);
-border-radius: 14px;
-font: &quot;Arial&quot;;
-font-size: 10px;
-border: 2px solid rgb(98, 98, 98);
-background-color: #000000;</string>
-    </property>
-    <property name="text">
-     <string>■</string>
-    </property>
-   </widget>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

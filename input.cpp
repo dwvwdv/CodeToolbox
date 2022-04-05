@@ -10,8 +10,8 @@ Input::Input(QWidget *parent) :
 {
     ui->setupUi(this);
     setFixedSize(660,470);
-//    this->setAttribute(Qt::WA_TranslucentBackground);//设置窗口背景透明
-    this->setWindowFlags(Qt::FramelessWindowHint);   //设置无边框窗口
+    this->setAttribute(Qt::WA_TranslucentBackground);//背景透明化
+    this->setWindowFlags(Qt::FramelessWindowHint);   //無邊窗口
 
     QPushButton *inputCodeBtn = ui->InputCode;
     connect(inputCodeBtn,QPushButton::clicked,this,&Input::inputCode);
@@ -46,4 +46,31 @@ void Input::openThisWindow(){
     this->ui->textEdit->setText(read_data(this->windowTitle(),Tag));
     qDebug() << read_data(this->windowTitle(),Tag) << "test";
     this->show();
+}
+
+void Input::mousePressEvent(QMouseEvent *event)
+{
+    if(event->button() == Qt::LeftButton)
+    {
+        m_bDrag = true;
+        mouseStartPoint = event->globalPos();
+        windowTopLeftPoint = this->frameGeometry().topLeft();
+    }
+}
+
+void Input::mouseMoveEvent(QMouseEvent *event)
+{
+    if(m_bDrag)
+    {
+        QPoint distance = event->globalPos() - mouseStartPoint;
+        this->move(windowTopLeftPoint + distance);
+    }
+}
+
+void Input::mouseReleaseEvent(QMouseEvent *event)
+{
+    if(event->button() == Qt::LeftButton)
+    {
+        m_bDrag = false;
+    }
 }

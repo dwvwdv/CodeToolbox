@@ -15,7 +15,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">background-color:#2f3542;
-border-radius: 40px;
+border-radius: 1px;
 font: 9pt &quot;Arial&quot;;
 font-size: 20px;
 border: 2px solid rgb(85, 0, 255);</string>
@@ -28,7 +28,7 @@ border: 2px solid rgb(85, 0, 255);</string>
     <rect>
      <x>30</x>
      <y>50</y>
-     <width>461</width>
+     <width>581</width>
      <height>381</height>
     </rect>
    </property>
@@ -51,8 +51,8 @@ p, li { white-space: pre-wrap; }
   <widget class="QPushButton" name="InputCode">
    <property name="geometry">
     <rect>
-     <x>540</x>
-     <y>400</y>
+     <x>510</x>
+     <y>380</y>
      <width>81</width>
      <height>31</height>
     </rect>
@@ -72,8 +72,8 @@ color: #00FF00;</string>
   <widget class="QPushButton" name="ExitBtn">
    <property name="geometry">
     <rect>
-     <x>540</x>
-     <y>360</y>
+     <x>510</x>
+     <y>340</y>
      <width>81</width>
      <height>31</height>
     </rect>
@@ -88,6 +88,27 @@ color: #00FF00;</string>
    </property>
    <property name="text">
     <string>Exit</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>50</y>
+     <width>20</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 0, 0);
+border-radius: 14px;
+font: &quot;Arial&quot;;
+font-size: 16px;
+border: 2px solid rgb(98, 98, 98);
+background-color: #000000;</string>
+   </property>
+   <property name="text">
+    <string>■</string>
    </property>
   </widget>
  </widget>
