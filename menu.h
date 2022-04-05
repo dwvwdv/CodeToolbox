@@ -3,6 +3,9 @@
 
 #include <QWidget>
 
+#include <QListWidget>
+#include <QDebug>
+
 namespace Ui {
 class Menu;
 }
@@ -14,11 +17,12 @@ class Menu : public QWidget
 public:
     explicit Menu(QWidget *parent = 0);
     ~Menu();
+signals:
+    void signalMenuClose(QString );
 
 private:
     Ui::Menu *ui;
-    void SelctClick();
-slots:
-    void def();
+
+    void slotSelctClick();
 };
 #endif // MENU_H

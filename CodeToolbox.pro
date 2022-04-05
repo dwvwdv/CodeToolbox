@@ -25,10 +25,23 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    menu.cpp \
+    input.cpp \
+    dataprocess.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    menu.h \
+    input.h \
+    dataprocess.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    menu.ui \
+    input.ui
+
+STATECHARTS +=
+
+
+# Icon <a href="https://www.flaticon.com/free-icons/toolbox" title="toolbox icons">Toolbox icons created by Freepik - Flaticon</a>

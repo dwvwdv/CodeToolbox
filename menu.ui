@@ -1,21 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <author/>
- <comment/>
- <exportmacro/>
  <class>Menu</class>
  <widget class="QWidget" name="Menu">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>291</width>
+    <height>261</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Mikaㄉ寶箱</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color:rgb(71, 0, 107)
+</string>
+  </property>
+  <widget class="QListWidget" name="SelectList">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>20</y>
+     <width>191</width>
+     <height>211</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:rgb(85, 255, 127);
+background-color:rgb(62, 0, 94)</string>
+   </property>
+   <item>
+    <property name="text">
+     <string>C++</string>
+    </property>
+    <property name="background">
+     <brush brushstyle="NoBrush">
+      <color alpha="255">
+       <red>255</red>
+       <green>170</green>
+       <blue>127</blue>
+      </color>
+     </brush>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Python</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>C#</string>
+    </property>
+    <property name="icon">
+     <iconset theme="這啥">
+      <normaloff>.</normaloff>.</iconset>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Java</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>PHP</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Shell</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Add Language...</string>
+    </property>
+   </item>
+  </widget>
  </widget>
- <pixmapfunction/>
+ <resources/>
  <connections/>
 </ui>
