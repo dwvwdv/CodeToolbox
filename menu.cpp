@@ -1,5 +1,6 @@
 #include "menu.h"
 #include "ui_menu.h"
+#include <QSystemTrayIcon>
 
 
 
@@ -8,10 +9,11 @@ Menu::Menu(QWidget *parent) :
     ui(new Ui::Menu)
 {
     ui->setupUi(this);
-    this->setWindowIcon(QIcon("../icon.png"));
+
+    this->setWindowIcon(QIcon("./myico.ico"));       //Icon設定
     this->setAttribute(Qt::WA_TranslucentBackground);//背景透明化
     this->setWindowFlags(Qt::FramelessWindowHint);   //無邊窗口
-    setFixedSize(300,270);
+    setFixedSize(300,270);                           //固定窗口大小
 
     //DefaultDir [C++ Python C# Java PHP Shell]
     QDir dir(QDir::currentPath());
@@ -67,5 +69,8 @@ void Menu::mouseReleaseEvent(QMouseEvent *event)
     if(event->button() == Qt::LeftButton)
     {
         m_bDrag = false;
+    }
+    else if(event->button() == Qt::RightButton){
+        QApplication::exit();
     }
 }

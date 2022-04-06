@@ -5,6 +5,7 @@
 #include <QInputDialog>
 #include <QDir>
 #include <QKeyEvent>
+#include <QSystemTrayIcon>
 
 #include "menu.h"
 #include "input.h"
@@ -24,6 +25,9 @@ public:
 
     QStringList getAllFunctionFile();
     void setFunctionList(QStringList );
+
+    //右下最小化圖標
+    void iconActivated(QSystemTrayIcon::ActivationReason reason);
 
     bool eventFilter(QObject *obj, QEvent *event);
     //void keyPressEvent(QKeyEvent *e);
@@ -54,6 +58,9 @@ private:
     QPoint      windowTopLeftPoint;
 
     QStringList functionFiles;
+    QSystemTrayIcon *trayIcon;
+
+
 };
 
 #endif // MAINWINDOW_H

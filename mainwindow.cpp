@@ -13,14 +13,33 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
     if (event->type() == QEvent::KeyPress)
     {
         QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
-//           qDebug() << "key " << keyEvent->key() << "from" << obj;
+           qDebug() << "key " << keyEvent->key() << "from" << obj;
         if(obj == ui->SelectList){
             if(keyEvent->key() == Qt::Key_D){
                 deleteItem();
             }
         }
+        else if(keyEvent->key() == Qt::Key_X)
+            QApplication::exit();
+        else if(keyEvent->key() == Qt::Key_Escape){
+            this->hide();
+            trayIcon->show();
+        }
     }
     return QObject::eventFilter(obj, event);
+}
+
+void MainWindow::iconActivated(QSystemTrayIcon::ActivationReason reason){
+    switch(reason){
+    case QSystemTrayIcon::DoubleClick :
+        this->setWindowState(Qt::WindowActive);
+        this->activateWindow();
+        this->show();
+        qDebug() << "get icon double click!" << endl;
+        break;
+    default:
+        break;
+    }
 }
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -29,12 +48,18 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     setFixedSize(750,450);
+
+    this->setWindowIcon(QIcon("./myico.ico"));       //Icon設定
+    trayIcon = new QSystemTrayIcon(this);
+    trayIcon->setIcon(QIcon("./myico.ico"));
+    trayIcon->show();
+    connect(trayIcon,&QSystemTrayIcon::activated,this,&MainWindow::iconActivated);
+
     this->setAttribute(Qt::WA_TranslucentBackground);//背景透明化
     this->setWindowFlags(Qt::FramelessWindowHint);   //無邊窗口
     qApp->installEventFilter(this);
 
     this->setFocusPolicy(Qt::StrongFocus);
-    this->setWindowIcon(QIcon("../icon.png"));
 
     menu.show();
     QListWidget *list = ui->SelectList;
@@ -113,7 +138,7 @@ void MainWindow::openMenu(){
 void MainWindow::slotSelctClick(){
     //Add function code
     if(ui->SelectList->currentItem()->text() == "Add Code..."){
-        QString newItemName = QInputDialog::getText(this,tr("Input"),tr("Input Item Name:"),QLineEdit::Normal,"Your New Item");
+        QString newItemName = QInputDialog::getText(this,NULL,tr("Input your item name."),QLineEdit::Normal,"");
         QList<QListWidgetItem *> items = ui->SelectList->findItems(newItemName,Qt::MatchExactly);
             if(items.size() > 0)
                 return ;
@@ -161,6 +186,9 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
     if(event->button() == Qt::LeftButton)
     {
         m_bDrag = false;
+    }
+    else if(event->button() == Qt::RightButton){
+        QApplication::exit();
     }
 }
 

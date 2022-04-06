@@ -45,3 +45,11 @@ STATECHARTS +=
 
 
 # Icon <a href="https://www.flaticon.com/free-icons/toolbox" title="toolbox icons">Toolbox icons created by Freepik - Flaticon</a>
+
+DISTFILES += \
+    快捷鍵 \
+    CodeToolbox.rc \
+    myico.ico
+
+#RC_FILE += CodeToolbox.rc
+RC_ICONS = myico.ico
