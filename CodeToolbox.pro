@@ -49,7 +49,8 @@ STATECHARTS +=
 DISTFILES += \
     快捷鍵 \
     CodeToolbox.rc \
-    Toolicon.ico
+    README.md \
+    icon.ico
 
 #RC_FILE += CodeToolbox.rc
-RC_ICONS = Toolicon.ico
+RC_ICONS = icon.ico

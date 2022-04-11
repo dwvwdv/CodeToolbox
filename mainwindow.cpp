@@ -49,9 +49,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setFixedSize(750,450);
 
-    this->setWindowIcon(QIcon("./Toolicon.ico"));       //Icon設定
+    this->setWindowIcon(QIcon("./icon.ico"));       //Icon設定
     trayIcon = new QSystemTrayIcon(this);
-    trayIcon->setIcon(QIcon("../Toolicon.ico"));
+    trayIcon->setIcon(QIcon("./icon.ico"));
     trayIcon->show();
     connect(trayIcon,&QSystemTrayIcon::activated,this,&MainWindow::iconActivated);
 

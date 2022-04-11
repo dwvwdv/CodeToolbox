@@ -51,7 +51,7 @@ p, li { white-space: pre-wrap; }
   <widget class="QPushButton" name="InputCode">
    <property name="geometry">
     <rect>
-     <x>510</x>
+     <x>490</x>
      <y>380</y>
      <width>81</width>
      <height>31</height>
@@ -72,7 +72,7 @@ color: #00FF00;</string>
   <widget class="QPushButton" name="ExitBtn">
    <property name="geometry">
     <rect>
-     <x>510</x>
+     <x>490</x>
      <y>340</y>
      <width>81</width>
      <height>31</height>
