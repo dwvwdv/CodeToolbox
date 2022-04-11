@@ -49,9 +49,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setFixedSize(750,450);
 
-    this->setWindowIcon(QIcon("./myico.ico"));       //Icon設定
+    this->setWindowIcon(QIcon("./Toolicon.ico"));       //Icon設定
     trayIcon = new QSystemTrayIcon(this);
-    trayIcon->setIcon(QIcon("./myico.ico"));
+    trayIcon->setIcon(QIcon("../Toolicon.ico"));
     trayIcon->show();
     connect(trayIcon,&QSystemTrayIcon::activated,this,&MainWindow::iconActivated);
 
@@ -138,7 +138,7 @@ void MainWindow::openMenu(){
 void MainWindow::slotSelctClick(){
     //Add function code
     if(ui->SelectList->currentItem()->text() == "Add Code..."){
-        QString newItemName = QInputDialog::getText(this,NULL,tr("Input your item name."),QLineEdit::Normal,"");
+        QString newItemName = QInputDialog::getText(this,tr("Create"),tr("Input your item name."),QLineEdit::Normal,"");
         QList<QListWidgetItem *> items = ui->SelectList->findItems(newItemName,Qt::MatchExactly);
             if(items.size() > 0)
                 return ;

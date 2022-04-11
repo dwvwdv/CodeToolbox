@@ -10,7 +10,7 @@ Input::Input(QWidget *parent) :
 {
     ui->setupUi(this);
     setFixedSize(660,470);
-    this->setWindowIcon(QIcon("./myico.ico"));       //Icon設定
+    this->setWindowIcon(QIcon("./Toolicon.ico"));       //Icon設定
     this->setAttribute(Qt::WA_TranslucentBackground);//背景透明化
     this->setWindowFlags(Qt::FramelessWindowHint);   //無邊窗口
 
