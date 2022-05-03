@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QString>
 #include <QMouseEvent>
+#include <QDesktopWidget>
 
 #include "dataprocess.h"
 

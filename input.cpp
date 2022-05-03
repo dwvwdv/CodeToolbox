@@ -10,9 +10,16 @@ Input::Input(QWidget *parent) :
 {
     ui->setupUi(this);
     setFixedSize(660,470);
-    this->setWindowIcon(QIcon("./icon.ico"));       //Icon設定
+    this->setWindowIcon(QIcon(":/icon.ico"));       //Icon設定
     this->setAttribute(Qt::WA_TranslucentBackground);//背景透明化
     this->setWindowFlags(Qt::FramelessWindowHint);   //無邊窗口
+    QDesktopWidget *screenResolution = QApplication::desktop();
+    qDebug() << this->geometry().width() << " " << this->geometry().height();
+    qDebug() << screenResolution->width() << screenResolution->height();
+    this->setGeometry(screenResolution->width() - this->geometry().width(),
+                  screenResolution->height()- this->geometry().height() - 50,
+                  this->geometry().width(),
+                  this->geometry().height());
 
     QPushButton *inputCodeBtn = ui->InputCode;
     connect(inputCodeBtn,QPushButton::clicked,this,&Input::inputCode);

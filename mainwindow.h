@@ -6,6 +6,7 @@
 #include <QDir>
 #include <QKeyEvent>
 #include <QSystemTrayIcon>
+#include <QDesktopWidget>
 
 #include "menu.h"
 #include "input.h"

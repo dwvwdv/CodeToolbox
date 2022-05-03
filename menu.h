@@ -6,6 +6,7 @@
 #include <QListWidget>
 #include <QDebug>
 #include <Qdir>
+#include <QInputDialog>
 
 namespace Ui {
 class Menu;
@@ -28,7 +29,14 @@ protected:
 private:
     Ui::Menu *ui;
 
+//    void eventFilter(QObject *obj,QEvent *event);
     void slotSelctClick();
+    void makeDirs();
+    void initDefaultDir(QDir dir);
+    void deleteItem();
+    void addItem();
+
+    const QString manager = "Manager";
 
     //窗口移動
     bool        m_bDrag;

@@ -2,7 +2,7 @@
 
 
 void write_data(QString filename,QString content,QString tag){
-    QString filePath = "./" + tag + "/";
+    QString filePath = "./Manager/" + tag + "/";
     QString fileName = filename;
     QFile file(filePath + fileName);
     qDebug() << filePath + fileName;
@@ -17,7 +17,7 @@ void write_data(QString filename,QString content,QString tag){
 }
 
 QString read_data(QString filename,QString tag){
-    QString filePath = "./" + tag + "/";
+    QString filePath = "./Manager/" + tag + "/";
     QString fileName = filename;
     QFile file(filePath + fileName);
     qDebug() << filePath + fileName;

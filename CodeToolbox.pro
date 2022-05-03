@@ -54,3 +54,6 @@ DISTFILES += \
 
 #RC_FILE += CodeToolbox.rc
 RC_ICONS = icon.ico
+
+RESOURCES += \
+    res.qrc

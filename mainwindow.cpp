@@ -1,13 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-
-//void MainWindow::keyPressEvent(QKeyEvent *e){
-//    if(e->key() == Qt::Key_D){
-//        qDebug() << "nb!";
-//    }
-//}
-
 bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 {
     if (event->type() == QEvent::KeyPress)
@@ -19,8 +12,6 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
                 deleteItem();
             }
         }
-        else if(keyEvent->key() == Qt::Key_X)
-            QApplication::exit();
         else if(keyEvent->key() == Qt::Key_Escape){
             this->hide();
             trayIcon->show();
@@ -49,9 +40,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setFixedSize(750,450);
 
-    this->setWindowIcon(QIcon("./icon.ico"));       //Icon設定
+    this->setWindowIcon(QIcon(":/icon.ico"));       //Icon設定
     trayIcon = new QSystemTrayIcon(this);
-    trayIcon->setIcon(QIcon("./icon.ico"));
+    trayIcon->setIcon(QIcon(":/icon.ico"));
     trayIcon->show();
     connect(trayIcon,&QSystemTrayIcon::activated,this,&MainWindow::iconActivated);
 
@@ -62,6 +53,12 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setFocusPolicy(Qt::StrongFocus);
 
     menu.show();
+    QDesktopWidget *screenResolution = QApplication::desktop();
+    menu.setGeometry(screenResolution->width() - menu.geometry().width(),
+                  screenResolution->height()- menu.geometry().height(),
+                  menu.geometry().width(),
+                  menu.geometry().height());
+
     QListWidget *list = ui->SelectList;
 
     //Enter MainWindow
@@ -101,14 +98,14 @@ void MainWindow::deleteItem(){
 }
 
 QStringList MainWindow::getAllFunctionFile(){
-    QDir dir(QDir::currentPath() + "/" + this->windowTitle());
+    QDir dir(QDir::currentPath() + "/Manager/" + this->windowTitle());
     dir.setFilter(QDir::NoDotAndDotDot | QDir::AllEntries);
     functionFiles = dir.entryList();
     return functionFiles;
 }
 
 void MainWindow::viewCodeUpdate(){
-    viewCode();
+    this->viewCode();
 }
 
 void MainWindow::setFunctionList(QStringList functionNames){
