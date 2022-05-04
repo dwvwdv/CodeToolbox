@@ -29,7 +29,6 @@ Menu::Menu(QWidget *parent) :
     QListWidget *list = ui->SelectList;
     connect(list,&QListWidget::itemDoubleClicked,this,&Menu::slotSelctClick);
 
-
 }
 
 Menu::~Menu()
@@ -51,6 +50,7 @@ void Menu::initDefaultDir(QDir dir){
         }
         ui->SelectList->addItem(dDirName);
     }
+    this->openMenuWindow();
 }
 
 void Menu::slotSelctClick()
@@ -122,3 +122,21 @@ void Menu::deleteItem(){
     delete item;
 }
 
+QStringList Menu::getAllLanguage(){
+    QDir dir(QDir::currentPath() + "/Manager");
+    dir.setFilter(QDir::NoDotAndDotDot | QDir::AllDirs);
+    languageNames = dir.entryList();
+    return languageNames;
+}
+
+void Menu::openMenuWindow(){
+    languageNames = this->getAllLanguage();
+    for(auto languageName:languageNames)
+        qDebug() << languageName;
+    this->setLanguageList(languageNames);
+}
+
+void Menu::setLanguageList(QStringList languageNames){
+    ui->SelectList->clear();
+    ui->SelectList->addItems(languageNames);
+}

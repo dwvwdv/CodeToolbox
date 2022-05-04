@@ -19,6 +19,8 @@ class Menu : public QWidget
 public:
     explicit Menu(QWidget *parent = 0);
     ~Menu();
+
+    void setLanguageList(QStringList );
 signals:
     void signalMenuClose(QString );
 protected:
@@ -35,12 +37,16 @@ private:
     void initDefaultDir(QDir dir);
     void deleteItem();
     void addItem();
+    void openMenuWindow();
+    QStringList getAllLanguage();
 
     const QString manager = "Manager";
+    QStringList languageNames;
 
     //窗口移動
     bool        m_bDrag;
     QPoint      mouseStartPoint;
     QPoint      windowTopLeftPoint;
+
 };
 #endif // MENU_H
