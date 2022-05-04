@@ -87,7 +87,7 @@ void MainWindow::deleteItem(){
     if(item == nullptr)
         return;
 
-    QString dFile = QDir::currentPath() + "/" + this->windowTitle() + "/" + item->text();
+    QString dFile = QDir::currentPath() + "/Manager/" + this->windowTitle() + "/" + item->text();
     bool isFinshDelete = QFile::remove(dFile);
     if(isFinshDelete)
         qDebug() << "Delete Finish!" << endl;
